@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Entity (name = "invoice")
 @Getter
 @Setter
+@Table(name = "Invoicedatabase.invoice")
 public class InvoiceEntity {
 
     @Id

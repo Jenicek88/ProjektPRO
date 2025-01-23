@@ -9,15 +9,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 @Repository
 public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Long>, JpaSpecificationExecutor<InvoiceEntity> {
+
+
+
     List<InvoiceEntity> findBySeller(PersonEntity seller);
     List<InvoiceEntity> findByBuyer(PersonEntity buyer);
 
-    @Query("SELECT SUM(i.price) FROM InvoiceEntity i WHERE YEAR(i.issued) = :year")
-    BigDecimal sumPricesByYear(@Param("year") int year);
 
-    @Query("SELECT SUM(i.price) FROM InvoiceEntity i")
-    BigDecimal sumAllPrices();
+   ///BigDecimal sumAllPrices();
+
+    @Query(value = "SELECT SUM(price) FROM invoicedatabase.invoice WHERE issued BETWEEN :startDate AND :endDate", nativeQuery = true)
+    BigDecimal sumPricesByYearNative(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

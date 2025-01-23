@@ -149,22 +149,17 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceStatisticsDTO getInvoiceStatistics() {
-        // Počet faktur
-        Long invoicesCount = invoiceRepository.count();
-
-        // Součet cen za aktuální rok
-        BigDecimal currentYearSum = invoiceRepository.sumPricesByYear(LocalDate.now().getYear());
-
-        // Součet cen za všechny roky
-        BigDecimal allTimeSum = invoiceRepository.sumAllPrices();
-
-        // Sestavení DTO
-        InvoiceStatisticsDTO statistics = new InvoiceStatisticsDTO();
-        statistics.setInvoicesCount(invoicesCount);
-        statistics.setCurrentYearSum(currentYearSum != null ? currentYearSum : BigDecimal.ZERO);
-        statistics.setAllTimeSum(allTimeSum != null ? allTimeSum : BigDecimal.ZERO);
-
-        return statistics;
+        return null;
     }
+
+
+    @Override
+    public BigDecimal getSumPricesByYear(int year) {
+        LocalDate startDate = LocalDate.of(LocalDate.now().getYear(), 1, 1);
+        LocalDate endDate = LocalDate.of(LocalDate.now().getYear(), 12, 31);
+        return invoiceRepository.sumPricesByYearNative(startDate, endDate);
+    }
+
+
 
 }

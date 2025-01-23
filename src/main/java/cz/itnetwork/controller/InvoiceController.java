@@ -2,10 +2,8 @@ package cz.itnetwork.controller;
 
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.InvoiceStatisticsDTO;
-import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.service.InvoiceService;
 import jakarta.validation.Valid;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -84,4 +82,9 @@ public class InvoiceController {
         return ResponseEntity.ok(statistics);
     }
 
+    @GetMapping("/statistics/{year}")
+    public ResponseEntity<BigDecimal> getSumPricesByYear(@PathVariable int year) {
+        BigDecimal sum = invoiceService.getSumPricesByYear(year);
+        return ResponseEntity.ok(sum);
+    }
 }

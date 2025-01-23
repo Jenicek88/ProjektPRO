@@ -23,8 +23,12 @@ package cz.itnetwork;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EntityScan(basePackages = "cz.itnetwork.entity")
+@EnableJpaRepositories(basePackages = "cz.itnetwork.entity.repository")
 public class ApplicationMain {
 
     public static void main(String[] args) {

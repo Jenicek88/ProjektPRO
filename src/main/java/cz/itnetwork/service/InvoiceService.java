@@ -4,8 +4,11 @@ import cz.itnetwork.controller.InvoiceController;
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.InvoiceStatisticsDTO;
 import cz.itnetwork.dto.PersonDTO;
+import cz.itnetwork.entity.repository.InvoiceRepository;
+import cz.itnetwork.entity.repository.LocalDate;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -31,4 +34,10 @@ public interface InvoiceService {
     void deleteInvoice(Long id);
 
     InvoiceStatisticsDTO getInvoiceStatistics();
+
+
+     BigDecimal getSumPricesByYear(int year);
+
+
+
 }
